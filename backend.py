@@ -15,7 +15,7 @@ def process_request():
     
     data = request.get_json()
     print ("post data: ",data)
-    order_id = data['queryResult']['parameters']['orderID']
+    order_id =int(data['queryResult']['parameters']['orderID'])
     print(f"Extracted Order ID: {order_id}")
     result = requests.post(baseURL, json={"orderId": order_id})
     result_data = result.json()
