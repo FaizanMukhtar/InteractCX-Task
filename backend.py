@@ -12,6 +12,7 @@ def home():
 
 @app.route('/', methods=['POST'])
 def process_request():
+    print (data)
     data = request.get_json()
     order_id = data.get('order_id', '')
     result = requests.post(baseURL, json={"orderId": order_id})
@@ -21,10 +22,10 @@ def process_request():
     shipmentDate_obj = datetime.strptime(shipmentDate, '%Y-%m-%dT%H:%M:%S.%fZ')
     newshipmentDate = shipmentDate_obj.strftime('%A, %d %b %Y')
     res = {
-        "fulfillmentText": f"{newshipmentDate}",
+        #"fulfillmentText": f"{newshipmentDate}",
         "fulfillmentMessages": [{
             "text": {
-                "text": [f"{newshipmentDate}"]
+                "text": [f"Your order {order_id} will be delivered on {newshipmentDate}"]
             }
         }]
     }
