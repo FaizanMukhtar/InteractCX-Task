@@ -19,10 +19,10 @@ def process_request():
     print(f"Extracted Order ID: {order_id}")
     result = requests.post(baseURL, json={"orderId": order_id})
     result_data = result.json()
-    print(result_data)
     shipmentDate = result_data.get('shipmentDate', '')
     shipmentDate_obj = datetime.strptime(shipmentDate, '%Y-%m-%dT%H:%M:%S.%fZ') 
     newshipmentDate = shipmentDate_obj.strftime('%A, %d %b %Y')
+    print(shipmentDate)
     res = {
         "fulfillmentText": [f"Your order {order_id} will be delivered on {newshipmentDate}"],
         "fulfillmentMessages": [{
